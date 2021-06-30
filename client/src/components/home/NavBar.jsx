@@ -1,11 +1,15 @@
 import { navData } from "../../constants/data";
 import { Box, Typography, makeStyles } from '@material-ui/core'
 
-const useStyle = makeStyles({
+const useStyle = makeStyles(theme =>({
     component:{
         display: 'flex',
         margin: '55px 130px 0 130px',
-        justifyContent:"space-between"
+        justifyContent:"space-between",
+        overflowX: 'overlay',
+        [theme.breakpoints.down('md')]: {
+            margin: 0
+        }
     },
     container:{
         textAlign: 'center',
@@ -18,7 +22,7 @@ const useStyle = makeStyles({
         fontSize: 14,
         fontWeight: 600
     }
-})
+}))
 
 const NavBar = () => {
     const classes = useStyle();

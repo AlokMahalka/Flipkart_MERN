@@ -7,7 +7,7 @@ import LoginDialog from "../login/Login";
 import { LoginContext } from "../../context/ContextProvider";
 import Profile from "./Profile";
 
-const useStyle = makeStyles({
+const useStyle = makeStyles(theme =>({
     login: {
         backgroundColor: '#ffffff',
         color: '#2874f0',
@@ -15,7 +15,11 @@ const useStyle = makeStyles({
         fontWeight: 600,
         borderRadius: 2,
         padding: '5px 40px',
-        boxShadow: 'none'
+        boxShadow: 'none',
+        [theme.breakpoints.down('sm')]:{
+            background : "#2874f0",
+            color: "#ffffff"
+        }
     },
     wrapper: {
         margin: '0 7% 0 auto',
@@ -24,13 +28,26 @@ const useStyle = makeStyles({
             marginRight: 50,
             alignItems: 'center',
             textDecoration:'none',
-            color:'#ffffff'
+            color:'#ffffff',
+            [theme.breakpoints.down('sm')]:{
+                color: "#2874f0",
+                alignItems:"center",
+                display:"flex",
+                flexDirection:"column",
+                marginTop: 10
+            }
+        },
+        [theme.breakpoints.down('sm')]:{
+            display:"block"
         }
     },
     container:{
-        display: 'flex'
+        display: 'flex',
+        [theme.breakpoints.down('sm')]:{
+            display:"block"
+        }
     }
-})
+}))
 
 const HeaderButtons = () => {
     const classes = useStyle();

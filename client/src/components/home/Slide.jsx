@@ -83,8 +83,8 @@ const Slide = ({timer,title,products}) => {
             <Carousel responsive={responsive} infinite={true} containerClass="carousel-container"
                 draggable={false} swipeable={false} centerMode={true}
                 autoPlay={true} autoPlaySpeed = {10000} keyBoardControl={true}
-                showDots={false} removeArrowOnDeviceType={["tablet","mobile"]}
-                dotListClass="custom-dot-list-style" itemClass="carousel-item-padding-40-px">
+                showDots={false} dotListClass="custom-dot-list-style" 
+                itemClass="carousel-item-padding-40-px">
                 {
                     products.map(product => (
                         <Link to={`product/${product.id}`}>

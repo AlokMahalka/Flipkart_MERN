@@ -1,18 +1,23 @@
-import { Box, makeStyles, Typography, Button} from '@material-ui/core';
+import { Box, makeStyles, Typography, Button, Grid} from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import CartItem from './CartItem';
 import { removeFromCart } from '../../redux/actions/cartActions';
 import EmptyCart from './EmptyCart';
 import TotalView from './TotalView';
 
-const useStyle = makeStyles({
+const useStyle = makeStyles(theme=>({
     component:{
-        marginTop: 55,
         padding: '30px 135px',
-        display: 'flex'
+        display: 'flex',
+        [theme.breakpoints.down('sm')]:{
+            padding:"15px 0"
+        }
     },
     leftComponent:{
-        width: '67%'
+        width: '67%',
+        [theme.breakpoints.down('sm')]:{
+            marginBottom: 15
+        }
     },
     header:{
         padding: '15px 24px',
@@ -33,7 +38,7 @@ const useStyle = makeStyles({
         borderTop: '1px solid #f0f0f0',
         boxShadow: '0 -2px 10px 0 rgb(0 0 0 /10%)'
     }
-})
+}))
 
 const Cart = () => {
     const classes = useStyle();
@@ -49,8 +54,8 @@ const Cart = () => {
         <>
             {
                 cartItems.length ? 
-                    <Box className={classes.component}>
-                        <Box className={classes.leftComponent}>
+                    <Grid container className={classes.component}>
+                        <Grid item lg={9} md={9} sm={12} xs={12} className={classes.leftComponent}>
                             <Box className={classes.header}>
                                 <Typography style={{fontWeight: 600, fontSize: 18}}>My Cart ({cartItems.length})</Typography>
                             </Box>
@@ -62,9 +67,11 @@ const Cart = () => {
                             <Box className={classes.bottom}>
                                 <Button className={classes.button} variant='contained'>Place Order</Button>
                             </Box>
-                        </Box>
-                        <TotalView cartItems={cartItems} />
-                    </Box> :
+                        </Grid>
+                        <Grid item lg={3} md={3} sm={12} xs={12}>
+                            <TotalView cartItems={cartItems} />
+                        </Grid>
+                    </Grid> :
                     <EmptyCart />
             }
         </>

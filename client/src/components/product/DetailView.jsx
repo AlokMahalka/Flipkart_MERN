@@ -1,20 +1,23 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductDetails } from '../../redux/actions/productActions';
-import { Box, makeStyles, Table, Typography, TableBody, TableRow, TableCell } from '@material-ui/core';
+import { Box, makeStyles, Table, Typography, TableBody, TableRow, TableCell, Grid } from '@material-ui/core';
 import clsx from 'clsx';
 import { LocalOffer as Badge} from '@material-ui/icons'
 import ActionItems from './ActionItems';
 
-const useStyle = makeStyles({
+const useStyle = makeStyles(theme=>({
     component:{
         marginTop:55,
         background: '#f2f2f2'
     },
     container:{
-        margin:'0 80px',
         background: '#ffffff',
-        display: 'flex'
+        display: 'flex',
+        [theme.breakpoints.down('md')]:{
+            margin: 0,
+            padding:" 0 20px"
+        }
     },
     rightContainer:{
         marginTop: 50,
@@ -41,7 +44,7 @@ const useStyle = makeStyles({
         marginRight: 10,
         color:"#00cc00"
     }
-})
+}))
 
 const DetailView = ({ match }) => {
     const classes = useStyle();
@@ -59,11 +62,13 @@ const DetailView = ({ match }) => {
     return (
         <Box className={classes.component}>
             { product && Object.keys(product).length &&
-                <Box className={classes.container}>
-                    <Box style={{minWidth:'40%'}}>
-                        <ActionItems product={product} />
-                    </Box>
-                    <Box className={classes.rightContainer}>
+                <Grid container className={classes.container}>
+                    <Grid item lg={4} md={4} sm={8} xs={12}>
+                        <Box style={{minWidth:'40%'}}>
+                            <ActionItems product={product} />
+                        </Box>
+                    </Grid>
+                    <Grid item lg={8} md={8} sm={8} xs={12} className={classes.rightContainer}>
                         <Typography>{product.title.longTitle}</Typography>
                         <Typography className={clsx(classes.smallText,classes.greyText)}>
                             8 Rating & 1 Review
@@ -112,9 +117,9 @@ const DetailView = ({ match }) => {
                                 </TableRow>
                             </TableBody>
                         </Table>
-                    </Box>
+                    </Grid>
                     
-                </Box>
+                </Grid>
             }
         </Box>
     )
